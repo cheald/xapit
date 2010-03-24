@@ -173,15 +173,23 @@ module Xapit
         records_by_class[class_name] ||= []
         records_by_class[class_name] << id
       end
+			
+			all_records = {}
       records_by_class.each do |class_name, ids|
-        records_by_class[class_name] = class_name.constantize.xapit_adapter.find_multiple(ids)
+				records = class_name.constantize.xapit_adapter.find_multiple(ids)
+				records.each do |record|
+					all_records["#{record.class.to_s}-#{record.id}"] = record
+				end
       end
-      matches.map do |match|
+			
+      matches.each do |match|
         class_name, id = match.document.data.split('-')
-        member = records_by_class[class_name].detect { |m| m.id == id.to_i || m.id == id }
-        member.xapit_relevance = match.percent
-        member
+				record = all_records[match.document.data]				
+				next if record.nil?
+				record.xapit_relevance = match.percent
       end
+			
+			all_records.values.compact
     end
   end
 end
