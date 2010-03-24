@@ -69,5 +69,5 @@ require File.dirname(__FILE__) + '/xapit/indexers/classic_indexer'
 require File.dirname(__FILE__) + '/xapit/adapters/abstract_adapter'
 require File.dirname(__FILE__) + '/xapit/adapters/active_record_adapter'
 require File.dirname(__FILE__) + '/xapit/adapters/data_mapper_adapter'
-require File.dirname(__FILE__) + '/xapit/adapters/couchrest_model_adapter'
-
+require File.dirname(__FILE__) + '/xapit/adapters/couchrest_adapter'
+require File.dirname(__FILE__) + '/xapit/adapters/mongo_mapper_adapter'
